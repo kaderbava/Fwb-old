@@ -1,6 +1,7 @@
 # CutOut
 PRODUCT_PACKAGES += \
-    NoCutoutOverlay1
+    NoCutoutOverlay1 \
+    NoCutoutOverlay2
 
 # Extra tools
 PRODUCT_PACKAGES += \
