@@ -1,3 +1,7 @@
+# CutOut
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay1
+
 # Extra tools
 PRODUCT_PACKAGES += \
     7z \
