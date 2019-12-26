@@ -60,6 +60,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
     private final View mCenteredIconView;
     private final View mClockView;
     private final View mOperatorNameView;
+    private final View mAncientLogoView;
     private final LinearLayout mCustomIconArea;
     private final DarkIconDispatcher mDarkIconDispatcher;
     private final NotificationPanelViewController mNotificationPanelViewController;
@@ -107,6 +108,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
                 statusBarView.findViewById(R.id.clock),
                 statusBarView.findViewById(R.id.operator_name_frame),
                 statusBarView.findViewById(R.id.centered_icon_area),
+                statusBarView.findViewById(R.id.status_bar_logo),
                 statusBarView.findViewById(R.id.left_icon_area));
     }
 
@@ -125,6 +127,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
             View clockView,
             View operatorNameView,
             View centeredIconView,
+            View ancientLogoView,
             LinearLayout customIconArea) {
         mNotificationIconAreaController = notificationIconAreaController;
         mHeadsUpManager = headsUpManager;
@@ -140,6 +143,7 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
         mStackScrollerController.addOnExpandedHeightChangedListener(mSetExpandedHeight);
         mStackScrollerController.setHeadsUpAppearanceController(this);
         mClockView = clockView;
+        mAncientLogoView = ancientLogoView;
         mOperatorNameView = operatorNameView;
         mCustomIconArea = customIconArea;
         mDarkIconDispatcher = Dependency.get(DarkIconDispatcher.class);
@@ -234,6 +238,9 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
                 if (mOperatorNameView != null) {
                     hide(mOperatorNameView, View.INVISIBLE);
                 }
+                if (mAncientLogoView.getVisibility() != View.GONE) {
+                    hide(mAncientLogoView, View.INVISIBLE);
+                }
                 hide(mCustomIconArea, View.INVISIBLE);
             } else {
                 if (clockStyle == 0 && isClockVisible) {
@@ -246,6 +253,9 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
                 }
                 if (mOperatorNameView != null) {
                     show(mOperatorNameView);
+                }
+                if (mAncientLogoView.getVisibility() != View.GONE) {
+                    show(mAncientLogoView);
                 }
                 show(mCustomIconArea);
                 hide(mHeadsUpStatusBarView, View.GONE, () -> {
