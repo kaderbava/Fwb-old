@@ -7438,5 +7438,8 @@ message MetricsEvent {
 
     // ANCIENT Metrics
     ANCIENT_SETTINGS = 2222;
+
+    // Panel for Mobile Data
+    PANEL_MOBILE_DATA = 2223;
   }
 }
