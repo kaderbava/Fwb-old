@@ -139,7 +139,7 @@ PRODUCT_PACKAGES += \
 include vendor/ancient/config/branding.mk
 
 # Overlays
-include vendor/overlays/config.mk
+#include vendor/overlays/config.mk
 
 # Apps
 ifeq ($(ANCIENT_NOGAPPS), true)
@@ -150,7 +150,7 @@ include vendor/gapps/config.mk
 endif
 
 # Customization
-include vendor/google-customization/config.mk
+#include vendor/google-customization/config.mk
 
 # Pixelstyle
 include vendor/pixelstyle/config.mk
@@ -165,7 +165,7 @@ include vendor/ancient/prebuilt/common/fonts/fonts.mk
 include vendor/ancient/config/packages.mk
 
 # Plugins
-include packages/apps/Plugins/plugins.mk
+#include packages/apps/Plugins/plugins.mk
 
 $(call inherit-product-if-exists, external/motorola/faceunlock/config.mk)
 
