@@ -98,6 +98,9 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 # leave less information available via JDWP.
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
+# Enable ccache
+USE_SYSTEM_CCACHE := true
+
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
