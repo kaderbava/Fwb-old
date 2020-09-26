@@ -49,6 +49,10 @@ PRODUCT_COPY_FILES += \
     vendor/ancient/prebuilt/common/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
 endif
 
+# system mount
+PRODUCT_COPY_FILES += \
+    vendor/ancient/prebuilt/common/bin/system-mount.sh:install/bin/system-mount.sh
+
 # Some permissions
 PRODUCT_COPY_FILES += \
     vendor/ancient/config/permissions/backup.xml:system/etc/sysconfig/backup.xml \
