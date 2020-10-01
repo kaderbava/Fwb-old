@@ -1,3 +1,24 @@
+# Extra tools
+PRODUCT_PACKAGES += \
+    7z \
+    awk \
+    bash \
+    bzip2 \
+    curl \
+    getcap \
+    htop \
+    lib7z \
+    libsepol \
+    nano \
+    pigz \
+    powertop \
+    setcap \
+    unrar \
+    unzip \
+    vim \
+    wget \
+    zip
+
 # Filesystems tools
 PRODUCT_PACKAGES += \
     fsck.exfat \
