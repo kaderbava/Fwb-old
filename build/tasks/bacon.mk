@@ -17,10 +17,12 @@
 
 ANCIENT_TARGET_PACKAGE := $(PRODUCT_OUT)/$(ANCIENT_VERSION).zip
 
+MD5 := prebuilts/build-tools/path/$(HOST_OS)-x86/md5sum
+
 .PHONY: bacon
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) mv $(INTERNAL_OTA_PACKAGE_TARGET) $(ANCIENT_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(ANCIENT_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(ANCIENT_TARGET_PACKAGE).md5sum
+	$(hide) $(MD5) $(ANCIENT_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(ANCIENT_TARGET_PACKAGE).md5sum
 	$(hide) ./vendor/ancient/tools/generate_json_build_info.sh $(ANCIENT_TARGET_PACKAGE)
 	@echo -e ""
 	@echo -e "${cya}Building ${bldcya}Ancient ${txtrst}";
