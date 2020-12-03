@@ -1,57 +1,37 @@
 #!/bin/sh
-#
-# Exports
-dir=$ANDROID_BUILD_TOP
-out=$dir/out/target/product
+DEVICE=$(echo $TARGET_PRODUCT | cut -d "_" -f2)
 
-export Changelog=Changelog.txt
+OUT="./out/target/product/$DEVICE"
+
+export Changelog="$OUT/Changelog.txt"
 
 if [ -f $Changelog ];
 then
-	rm -f $Changelog
+    rm -f $Changelog
 fi
+
+export formatter_script=$(realpath vendor/ancient/tools/changelog_repo_formatter.sh)
 
 touch $Changelog
 
-# Print something to build output
-echo ${bldppl}"Generating changelog..."${txtrst}
+echo "Generating changelog..."
 
-# Use 'export USER_BUILD_NO_CHANGELOG=1' before build/envsetup.sh to skip changelog
-if [ $USER_BUILD_NO_CHANGELOG ]&&[ "$USER_BUILD_NO_CHANGELOG" -eq 1 ]; then
-  echo "Skipped because variable 'USER_BUILD_NO_CHANGELOG' was set to 1" | tee $Changelog;
-else
-  for i in $(seq 10);
-  do
-  export After_Date=`date --date="$i days ago" +%m-%d-%Y`
-  k=$(expr $i - 1)
-    export Until_Date=`date --date="$k days ago" +%m-%d-%Y`
+for i in $(seq 14);
+do
+    export After_Date=`date --date="$i days ago" +%Y/%m/%d`
+    k=$(expr $i - 1)
+    export Until_Date=`date --date="$k days ago" +%Y/%m/%d`
 
     # Line with after --- until was too long for a small ListView
-    echo '====================' >> $Changelog;
+    echo '=======================' >> $Changelog;
     echo  "     "$Until_Date       >> $Changelog;
-    echo '===================='	>> $Changelog;
+    echo '=======================' >> $Changelog;
     echo >> $Changelog;
 
     # Cycle through every repo to find commits between 2 dates
-    CURRENT_PATH="$(realpath `pwd`)"
-
-    repo forall -c "GIT_LOG=\`git log --oneline --after=$After_Date --until=$Until_Date\` ; if [ ! -z \"\$GIT_LOG\" ]; then printf  '\n   * '; realpath \`pwd\` | sed 's|^$CURRENT_PATH/||' ; echo \"\$GIT_LOG\"; fi" >> $Changelog
+    repo forall -c '. $formatter_script' >> $Changelog
     echo >> $Changelog;
-  done
+done
 
-  sed -i 's/project/   */g' $Changelog
-fi
-
-if [ -e $out/*/$Changelog ]
-then
-rm $out/*/$Changelog
-fi
-if [ -e $out/*/system/etc/$Changelog ]
-then
-rm $out/*/system/etc/$Changelog
-fi
+mkdir -p $OUT/system/etc/
 cp $Changelog $OUT/system/etc/
-cp $Changelog $OUT/
-rm $Changelog
-
-exit 0
