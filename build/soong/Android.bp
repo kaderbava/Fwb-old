@@ -1,12 +1,4 @@
 bootstrap_go_package {
-    name: "soong-ancient",
-    pkgPath: "ancient/soong/android",
-    srcs: [
-        "android/variable.go",
-    ],
-}
-
-bootstrap_go_package {
     name: "soong-ancient-generator",
     pkgPath: "ancient/soong/generator",
     deps: [
