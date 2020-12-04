@@ -43,7 +43,7 @@ PRODUCT_PACKAGES += \
     OmniJaws \
     WeatherIcons
 
-ifneq ($(ANCIENT_NOGAPPS), true)
+ifeq ($(ANCIENT_GAPPS), true)
 PRODUCT_PACKAGES += \
     PixelLiveWallpaperPrebuilt
 endif

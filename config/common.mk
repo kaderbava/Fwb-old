@@ -2,7 +2,7 @@ PRODUCT_BRAND ?= Ancient-OS
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-ifneq ($(ANCIENT_NOGAPPS), true)
+ifeq ($(ANCIENT_GAPPS), true)
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.com.google.clientidbase=android-google
@@ -148,12 +148,11 @@ include vendor/ancient/config/branding.mk
 # Overlays
 #include vendor/overlays/config.mk
 
-# Apps
-ifeq ($(ANCIENT_NOGAPPS), true)
-include vendor/ancient/config/basicapps.mk
+# Variant
+ifeq ($(ANCIENT_GAPPS), true)
+    include vendor/google/gapps/config.mk
 else
-# Gapps
-include vendor/gapps/config.mk
+    include vendor/ancient/config/basicapps.mk
 endif
 
 # Customization
