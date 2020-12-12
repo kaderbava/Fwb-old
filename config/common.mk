@@ -171,7 +171,7 @@ include vendor/ancient/prebuilt/common/fonts/fonts.mk
 include vendor/ancient/config/packages.mk
 
 # Plugins
-#include packages/apps/Plugins/plugins.mk
+include packages/apps/Plugins/plugins.mk
 
 $(call inherit-product-if-exists, external/motorola/faceunlock/config.mk)
 
