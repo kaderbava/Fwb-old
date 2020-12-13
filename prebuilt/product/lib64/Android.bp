@@ -1,18 +1,11 @@
 cc_prebuilt_library_shared {
     name: "libjni_latinimegoogle",
 
-    target: {
-		android_arm: {
-			srcs: ["lib/libjni_latinimegoogle.so"],
-		},
-		android_arm64: {
-			srcs: ["lib64/libjni_latinimegoogle.so"],
-		},
-	},
+    srcs: ["libjni_latinimegoogle.so"],
 
     overrides: ["libjni_latinime"],
     product_specific: true,
-    compile_multilib: "both",
+    compile_multilib: "64",
     shared_libs: ["libstdc++"],
     strip: {
         none: true,
