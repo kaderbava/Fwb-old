@@ -1,5 +1,5 @@
 ifndef ANCIENT_BUILD_TYPE
-    ANCIENT_BUILD_TYPE := PREHISTORIC
+    ANCIENT_BUILD_TYPE := Copper
 endif
 
 # Set all versions
@@ -31,7 +31,7 @@ endif
 
     endif
     ifneq ($(IS_OFFICIAL), true)
-       ANCIENT_BUILD_TYPE := PREHISTORIC
+       ANCIENT_BUILD_TYPE := Copper
        $(error Device is not official "$(FOUND)")
     endif
 endif
