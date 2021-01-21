@@ -146,7 +146,7 @@ PRODUCT_PACKAGES += \
 include vendor/ancient/config/branding.mk
 
 # Overlays
-#include vendor/overlays/config.mk
+include vendor/overlays/config.mk
 
 # Variant
 ifeq ($(ANCIENT_GAPPS), true)
