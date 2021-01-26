@@ -150,9 +150,14 @@ include vendor/overlays/config.mk
 
 # Variant
 ifeq ($(ANCIENT_GAPPS), true)
-    include vendor/google/gapps/config.mk
+# Inherit GMS, Pixel Features, and Modules.
+include vendor/google/gms/config.mk
+# Don't preoptimize prebuilts when building GMS.
+DONT_DEXPREOPT_PREBUILTS := true
+# Pixel Features
+include vendor/google/pixel/config.mk
 else
-    include vendor/ancient/config/basicapps.mk
+include vendor/ancient/config/basicapps.mk
 endif
 
 # Blur
