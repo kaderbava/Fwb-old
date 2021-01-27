@@ -124,11 +124,6 @@ DEVICE_PACKAGE_OVERLAYS += vendor/ancient/overlay/common
 PRODUCT_PACKAGES += \
     NoCutoutOverlay
 
-# PixelSetupWizard overlay
-PRODUCT_PACKAGES += \
-    PixelSetupWizardOverlay \
-    PixelSetupWizardAodOverlay
-
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
