@@ -1,4 +1,4 @@
-ANCIENT_OTA_VERSION_CODE := ten
+ANCIENT_OTA_VERSION_CODE := eleven
 
 CUSTOM_PROPERTIES += \
     ro.ancient.ota.version_code=$(ANCIENT_OTA_VERSION_CODE)

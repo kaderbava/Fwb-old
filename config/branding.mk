@@ -26,7 +26,7 @@ ifeq ($(ANCIENT_OFFICIAL), true)
       ANCIENT_BUILD_TYPE := Iron
 
 # OTA
-ifeq ($(FORCE_OTA), true)
+ifeq ($(ANCIENT_GAPPS), true)
 include vendor/ancient/config/ota.mk
 endif
 
