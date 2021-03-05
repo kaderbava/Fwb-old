@@ -50,35 +50,27 @@ custom_dependencies = "ancient.dependencies"
 org_manifest = "ancient-devices"  # leave empty if org is provided in manifest
 org_display = "Ancient-Devices"  # needed for displaying
 
-github_auth = None
-
+github_token = None
 
 local_manifests = '.repo/local_manifests'
 if not os.path.exists(local_manifests):
     os.makedirs(local_manifests)
 
-
 def debug(*args, **kwargs):
     if DEBUG:
         print(*args, **kwargs)
 
-
 def add_auth(g_req):
-    global github_auth
-    if github_auth is None:
+    global github_token
+    if github_token is None:
+        # get token from .netrc if possible
         try:
             auth = netrc.netrc().authenticators("api.github.com")
+            github_token = auth[2]
         except (netrc.NetrcParseError, IOError):
             auth = None
-        if auth:
-            github_auth = base64.b64encode(
-                ('%s:%s' % (auth[0], auth[2])).encode()
-            )
-        else:
-            github_auth = ""
-    if github_auth:
-        g_req.add_header("Authorization", "Basic %s" % github_auth)
-
+    if github_token:
+        g_req.add_header("Authorization", "token %s" % github_token)
 
 def indent(elem, level=0):
     # in-place prettyprint formatter
@@ -112,14 +104,12 @@ def get_from_manifest(device_name):
                 return lp
     return None
 
-
 def is_in_manifest(project_path):
     man = load_manifest(custom_local_manifest)
     for local_path in man.findall("project"):
         if local_path.get("path") == project_path:
             return True
     return False
-
 
 def add_to_manifest(repos, fallback_branch=None):
     lm = load_manifest(custom_local_manifest)
@@ -178,7 +168,6 @@ def add_to_manifest(repos, fallback_branch=None):
 
 _fetch_dep_cache = []
 
-
 def fetch_dependencies(repo_path, fallback_branch=None):
     global _fetch_dep_cache
     if repo_path in _fetch_dep_cache:
@@ -219,10 +208,8 @@ def fetch_dependencies(repo_path, fallback_branch=None):
     for deprepo in syncable_repos:
         fetch_dependencies(deprepo)
 
-
 def has_branch(branches, revision):
     return revision in (branch['name'] for branch in branches)
-
 
 def detect_revision(repo):
     """
@@ -242,7 +229,6 @@ def detect_revision(repo):
 
     print("Branch %s not found" % custom_default_revision)
     sys.exit()
-
 
 def main():
     global DEBUG
