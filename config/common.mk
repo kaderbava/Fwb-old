@@ -62,7 +62,8 @@ PRODUCT_COPY_FILES += \
     vendor/ancient/config/permissions/privapp-permissions-product-ancient.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-product-ancient.xml \
     vendor/ancient/config/permissions/privapp-permissions-system-google-ancient.xml:system/etc/permissions/privapp-permissions-system-google-ancient.xml \
     vendor/ancient/config/permissions/privapp-permissions-product-google-ancient.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-product-google-ancient.xml \
-    vendor/ancient/config/permissions/privapp-permissions-elgoog.xml:system/etc/permissions/privapp-permissions-elgoog.xml
+    vendor/ancient/config/permissions/privapp-permissions-elgoog.xml:system/etc/permissions/privapp-permissions-elgoog.xml \
+    vendor/ancient/config/permissions/privapp-permissions-system_ext-ancient.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-system_ext-ancient.xml
 
 # Live Display
 PRODUCT_COPY_FILES += \
