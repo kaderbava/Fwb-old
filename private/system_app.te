@@ -156,6 +156,10 @@ allow system_app system_server:udp_socket {
 #selinux status
 allow system_app selinuxfs:file r_file_perms;
 
+# Allow Settings mm stat for zram
+allow system_app sysfs_zram:dir search;
+allow system_app sysfs_zram:file read;
+
 ###
 ### Neverallow rules
 ###
