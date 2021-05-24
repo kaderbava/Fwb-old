@@ -139,6 +139,11 @@ else
 include vendor/ancient/config/basicapps.mk
 endif
 
+# Disable touch video heatmap to reduce latency, motion jitter, and CPU usage
+# on supported devices with Deep Press input classifier HALs and models
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.input.video_enabled=false
+
 # Blur
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.sf.blurs_are_expensive=1 \
