@@ -1,3 +1,7 @@
+# Config
+PRODUCT_PACKAGES += \
+    SimpleDeviceConfig
+
 # CutOut
 PRODUCT_PACKAGES += \
     NoCutoutOverlay1 \
