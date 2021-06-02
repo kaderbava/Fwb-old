@@ -48,6 +48,7 @@ PRODUCT_PACKAGES += \
     Launcher3QuickStep \
     ThemePicker \
     TouchGestures \
+    Recorder \
     StitchImage \
     OmniJaws \
     WeatherIcons
