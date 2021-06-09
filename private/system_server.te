@@ -903,6 +903,7 @@ allow system_server {
   proc_cmdline
   proc_last_kmsg
   proc_loadavg
+  proc_locks
   proc_meminfo
   proc_pagetypeinfo
   proc_pipe_conf
