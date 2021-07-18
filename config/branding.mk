@@ -47,6 +47,7 @@ endif
 
 PRODUCT_GENERIC_PROPERTIES += \
     ro.build.datetime=$(BUILD_DATE_TIME) \
+    ro.build.stock_fingerprint=$(TARGET_FORCE_BUILD_FINGERPRINT) \
     ro.ancient.custom.version=$(ANCIENT_VERSION_CUSTOM) \
     ro.ancient.version=$(ANCIENT_VERSION) \
     ro.ancient.build_date=$(ANCIENT_BUILD_DATE) \
