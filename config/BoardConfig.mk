@@ -5,6 +5,7 @@ include vendor/ancient/config/BoardConfigQcom.mk
 endif
 
 include vendor/ancient/config/BoardConfigSoong.mk
+include vendor/fingerprint/fingerprint.mk
 
 ifneq ($(TARGET_USES_PREBUILT_CAMERA_SERVICE), true)
 PRODUCT_SOONG_NAMESPACES += \
