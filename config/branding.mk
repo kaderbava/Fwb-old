@@ -1,5 +1,9 @@
 ifndef ANCIENT_BUILD_TYPE
+    ifeq ($(ANCIENT_WEEABO), true)
+    ANCIENT_BUILD_TYPE := Lucy_Heartfillia
+    else
     ANCIENT_BUILD_TYPE := Copper
+    endif
 endif
 
 # Set all versions
@@ -14,8 +18,14 @@ ANCIENT_BUILD_DATE := $(ANCIENT_DATE_YEAR)$(ANCIENT_DATE_MONTH)$(ANCIENT_DATE_DA
 BUILD_DATE_TIME := $(ANCIENT_DATE_YEAR)$(ANCIENT_DATE_MONTH)$(ANCIENT_DATE_DAY)-$(ANCIENT_DATE_HOUR)$(ANCIENT_DATE_MINUTE)
 
 ANCIENT_PLATFORM_VERSION := 11.0
+
+ifeq ($(ANCIENT_WEEABO), true)
+ANCIENT_BASE_EDITION := Weeabo
+ANCIENT_VERSION_CUSTOM := Weeabo-v5.5
+else
 ANCIENT_BASE_EDITION := Society
 ANCIENT_VERSION_CUSTOM := Society-v5.5
+endif
 BUILD_VERSION := v5.5
 
 ifeq ($(ANCIENT_OFFICIAL), true)
@@ -23,8 +33,11 @@ ifeq ($(ANCIENT_OFFICIAL), true)
    FOUND_DEVICE =  $(filter $(CURRENT_DEVICE), $(LIST))
     ifeq ($(FOUND_DEVICE),$(CURRENT_DEVICE))
       IS_OFFICIAL=true
+      ifeq ($(ANCIENT_WEEABO), true)
+      ANCIENT_BUILD_TYPE := Rias_Gremory
+      else
       ANCIENT_BUILD_TYPE := Iron
-
+      endif
 # OTA
 ifeq ($(ANCIENT_GAPPS), true)
 include vendor/ancient/config/ota.mk
@@ -32,7 +45,11 @@ endif
 
     endif
     ifneq ($(IS_OFFICIAL), true)
+       ifeq ($(ANCIENT_WEEABO), true)
+       ANCIENT_BUILD_TYPE := Lucy_Heartfillia
+       else
        ANCIENT_BUILD_TYPE := Copper
+       endif
        $(error Device is not official "$(FOUND)")
     endif
 endif

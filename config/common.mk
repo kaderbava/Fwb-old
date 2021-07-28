@@ -130,6 +130,12 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/ancient/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/ancient/overlay/common
 
+#Weeabo Overlays
+ifeq ($(ANCIENT_WEEABO), true)
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/weeabostyle
+DEVICE_PACKAGE_OVERLAYS += vendor/weeabostyle
+endif
+
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
