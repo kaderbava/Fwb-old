@@ -139,4 +139,14 @@ privileged Google applications in GMS devices.
         <permission name="android.permission.RECOVERY" />
         <permission name="android.permission.CHANGE_CONFIGURATION" />
     </privapp-permissions>
+
+    <privapp-permissions package="com.android.settings">
+        <permission name="lineageos.permission.MANAGE_LIVEDISPLAY" />
+        <permission name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
+    </privapp-permissions>
+
+    <privapp-permissions package="com.android.systemui">
+        <permission name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
+    </privapp-permissions>
+
 </permissions>
