@@ -149,4 +149,13 @@ privileged Google applications in GMS devices.
         <permission name="lineageos.permission.HARDWARE_ABSTRACTION_ACCESS" />
     </privapp-permissions>
 
+    <privapp-permissions package="com.google.android.flipendo">
+        <permission name="android.permission.MODIFY_QUIET_MODE" />
+        <permission name="android.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="android.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS" />
+        <permission name="android.permission.REAL_GET_TASKS" />
+        <permission name="android.permission.TETHER_PRIVILEGED" />
+        <permission name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
+    </privapp-permissions>
+
 </permissions>
