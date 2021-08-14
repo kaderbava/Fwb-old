@@ -50,6 +50,7 @@ PRODUCT_PACKAGES += \
     ThemePicker \
     TouchGestures \
     Recorder \
+    SoftAPManager \
     StitchImage \
     OmniJaws \
     WeatherIcons
