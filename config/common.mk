@@ -128,12 +128,12 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/ancient/overlay
-DEVICE_PACKAGE_OVERLAYS += vendor/ancient/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/ancient/overlay/common
 
 #Weeabo Overlays
 ifeq ($(ANCIENT_WEEABO), true)
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/weeabostyle
-DEVICE_PACKAGE_OVERLAYS += vendor/weeabostyle
+PRODUCT_PACKAGE_OVERLAYS += vendor/weeabostyle
 endif
 
 # Dex preopt
