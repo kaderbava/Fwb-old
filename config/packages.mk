@@ -45,6 +45,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CustomDoze \
     Eleven \
+    GamingMode \
     OmniStyle \
     Launcher3QuickStep \
     ThemePicker \
