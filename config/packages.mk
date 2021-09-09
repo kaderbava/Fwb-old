@@ -37,6 +37,10 @@ PRODUCT_PACKAGES += \
     mkfs.ntfs \
     mount.ntfs
 
+# Fonts
+PRODUCT_PACKAGES += \
+    Ancient-Fonts
+
 # Sqlite
 PRODUCT_PACKAGES += \
     sqlite3
