@@ -158,4 +158,8 @@ privileged Google applications in GMS devices.
         <permission name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
     </privapp-permissions>
 
+    <privapp-permissions package="com.android.settings">
+        <permission name="android.permission.ACCESS_FONT_MANAGER"/>
+    </privapp-permissions>
+
 </permissions>
