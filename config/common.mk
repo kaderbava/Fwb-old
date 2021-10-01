@@ -132,7 +132,8 @@ PRODUCT_PACKAGES += \
 
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.storage_manager.enabled=true
+    ro.storage_manager.enabled=true \
+    persist.sys.fflag.override.settings_fuse=false
 
 # Media
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
