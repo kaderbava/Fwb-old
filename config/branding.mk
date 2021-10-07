@@ -63,7 +63,6 @@ ANCIENT_VERSION := AncientOS-R-$(ANCIENT_BASE_EDITION)-$(BUILD_VERSION)-$(ANCIEN
 endif
 
 PRODUCT_GENERIC_PROPERTIES += \
-    ro.build.datetime=$(BUILD_DATE_TIME) \
     ro.ancient.custom.version=$(ANCIENT_VERSION_CUSTOM) \
     ro.ancient.version=$(ANCIENT_VERSION) \
     ro.ancient.build_date=$(ANCIENT_BUILD_DATE) \
