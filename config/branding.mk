@@ -21,12 +21,12 @@ ANCIENT_PLATFORM_VERSION := 11.0
 
 ifeq ($(ANCIENT_WEEABO), true)
 ANCIENT_BASE_EDITION := Weeabo
-ANCIENT_VERSION_CUSTOM := Weeabo-v5.6
+ANCIENT_VERSION_CUSTOM := Weeabo-v6.0
 else
 ANCIENT_BASE_EDITION := Society
-ANCIENT_VERSION_CUSTOM := Society-v5.6
+ANCIENT_VERSION_CUSTOM := Society-v6.0
 endif
-BUILD_VERSION := v5.6
+BUILD_VERSION := v6.0
 
 ifeq ($(ANCIENT_OFFICIAL), true)
    LIST = $(shell cat vendor/ancient/ancient.devices)

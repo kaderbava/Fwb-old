@@ -1,4 +1,4 @@
-ANCIENT_OTA_VERSION_CODE := eleven
+ANCIENT_OTA_VERSION_CODE := twelve
 
 PRODUCT_GENERIC_PROPERTIES += \
     ro.ancient.ota.version_code=$(ANCIENT_OTA_VERSION_CODE)
