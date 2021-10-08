@@ -156,7 +156,7 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 include vendor/ancient/config/branding.mk
 
 # Overlays
-include vendor/overlays/config.mk
+#include vendor/overlays/config.mk
 
 # Variant
 ifeq ($(ANCIENT_GAPPS), true)
@@ -196,7 +196,7 @@ include vendor/ancient/prebuilt/common/fonts/fonts.mk
 include vendor/ancient/config/packages.mk
 
 # Plugins
-include packages/apps/Plugins/plugins.mk
+#include packages/apps/Plugins/plugins.mk
 
 ifeq ($(EXTRA_FOD_ANIMATIONS),true)
 PRODUCT_PACKAGES += \
