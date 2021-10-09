@@ -67,7 +67,7 @@ public class FeatureFlags {
     }
 
     public boolean isMonetEnabled() {
-        return mFlagReader.isEnabled(R.bool.flag_monet);
+        return true;
     }
 
     public boolean isPMLiteEnabled() {

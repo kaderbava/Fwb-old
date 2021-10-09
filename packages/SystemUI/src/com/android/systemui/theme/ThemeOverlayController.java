@@ -27,6 +27,7 @@ import static com.android.systemui.theme.ThemeOverlayApplier.OVERLAY_COLOR_SOURC
 import static com.android.systemui.theme.ThemeOverlayApplier.TIMESTAMP_FIELD;
 
 import android.annotation.Nullable;
+import android.app.ActivityThread;
 import android.app.WallpaperColors;
 import android.app.WallpaperManager;
 import android.app.WallpaperManager.OnColorsChangedListener;
@@ -46,6 +47,11 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import com.android.systemui.theme.ColorScheme;
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.concurrent.Executor;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -129,6 +135,7 @@ public class ThemeOverlayController extends SystemUI implements Dumpable {
     private boolean mDeferredThemeEvaluation;
     // Determines if we should ignore THEME_CUSTOMIZATION_OVERLAY_PACKAGES setting changes.
     private boolean mSkipSettingChange;
+    final Context context = ActivityThread.currentApplication();
 
     private final DeviceProvisionedListener mDeviceProvisionedListener =
             new DeviceProvisionedListener() {
@@ -403,25 +410,75 @@ public class ThemeOverlayController extends SystemUI implements Dumpable {
      * Return the main theme color from a given {@link WallpaperColors} instance.
      */
     protected int getNeutralColor(@NonNull WallpaperColors wallpaperColors) {
-        return wallpaperColors.getPrimaryColor().toArgb();
+        ColorScheme colorScheme = new ColorScheme(context);
+        return colorScheme.getN2MAIN();
     }
 
-    protected int getAccentColor(@NonNull WallpaperColors wallpaperColors) {
-        Color accentCandidate = wallpaperColors.getSecondaryColor();
-        if (accentCandidate == null) {
-            accentCandidate = wallpaperColors.getTertiaryColor();
-        }
-        if (accentCandidate == null) {
-            accentCandidate = wallpaperColors.getPrimaryColor();
-        }
-        return accentCandidate.toArgb();
+    protected int getAccentColor(@NonNull WallpaperColors wallpaperColors) { 
+        ColorScheme colorScheme = new ColorScheme(context);
+        return colorScheme.getAccent1MAIN();
+    }
+
+    private final boolean inDarkMode() {
+        int i = mContext.getResources().getConfiguration().uiMode & 48;
+        return (i == 0 || i == 16 || i != 32) ? false : true;
     }
 
     /**
      * Given a color candidate, return an overlay definition.
      */
     protected @Nullable FabricatedOverlay getOverlay(int color, int type) {
-        return null;
+        List<Integer> list;
+        String str;
+        String str2;
+        ColorScheme colorScheme = new ColorScheme(context);
+        colorScheme = colorScheme;
+        if (type == 1) {
+            list = colorScheme.getAllAccentColors();
+            str = "accent";
+        } else {
+            list = colorScheme.getAllNeutralColors();
+            str = "neutral";
+        }
+        ColorScheme colorScheme2 = colorScheme;
+        int size = colorScheme2.getAccent1().size();
+        FabricatedOverlay.Builder builder = new FabricatedOverlay.Builder("com.android.systemui", str, "android");
+        int i3 = 0;
+        int size2 = list.size() - 1;
+        if (size2 >= 0) {
+            while (true) {
+                int i4 = i3 + 1;
+                int i5 = i3 % size;
+                int i6 = (i3 / size) + 1;
+                if (i5 == 0) {
+                    str2 = "android:color/system_" + str + i6 + "_10";
+                } else if (i5 != 1) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("android:color/system_");
+                    sb.append(str);
+                    sb.append(i6);
+                    sb.append('_');
+                    sb.append(i5 - 1);
+                    sb.append("00");
+                    str2 = sb.toString();
+                } else {
+                    str2 = "android:color/system_" + str + i6 + "_50";
+                }
+                builder.setResourceValue(str2, 28, setAlphaComponent(list.get(i3).intValue(), 255));
+                if (i4 > size2) {
+                    break;
+                }
+                i3 = i4;
+            }
+        }
+        return builder.build();
+    }
+
+    public static int setAlphaComponent(int i, int i2) {
+        if (i2 >= 0 && i2 <= 255) {
+            return (i & 16777215) | (i2 << 24);
+        }
+        throw new IllegalArgumentException("alpha must be between 0 and 255.");
     }
 
     private void updateThemeOverlays() {
