@@ -160,12 +160,7 @@ include vendor/ancient/config/branding.mk
 
 # Variant
 ifeq ($(ANCIENT_GAPPS), true)
-# Inherit GMS, Pixel Features, and Modules.
-include vendor/google/gms/config.mk
-# Don't preoptimize prebuilts when building GMS.
-DONT_DEXPREOPT_PREBUILTS := true
-# Pixel Features
-include vendor/google/pixel/config.mk
+include vendor/gapps/common/common-vendor.mk
 else
 include vendor/ancient/config/basicapps.mk
 endif
