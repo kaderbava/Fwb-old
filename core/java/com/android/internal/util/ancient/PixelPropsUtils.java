@@ -30,7 +30,6 @@ public class PixelPropsUtils {
 
     private static final Map<String, Object> propsToChange;
     private static final Map<String, Object> propsToChangePixelXL;
-    private static final Map<String, Object> propsToChangePixel3XL;
 
     private static final String[] packagesToChange = {
             "com.android.vending",
@@ -64,15 +63,12 @@ public class PixelPropsUtils {
             "com.google.android.apps.googleassistant",
             "com.google.android.apps.maps",
             "com.google.android.gms",
-            "com.google.android.apps.nexuslauncher"
+            "com.google.android.apps.nexuslauncher",
+            "com.google.android.googlequicksearchbox"
     };
 
     private static final String[] packagesToChangePixelXL = {
             "com.google.android.apps.photos"
-    };
-
-    private static final String[] packagesToChangePixel3XL = {
-            "com.google.android.googlequicksearchbox"
     };
 
     static {
@@ -90,13 +86,6 @@ public class PixelPropsUtils {
         propsToChangePixelXL.put("PRODUCT", "marlin");
         propsToChangePixelXL.put("MODEL", "Pixel XL");
         propsToChangePixelXL.put("FINGERPRINT", "google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys");
-        propsToChangePixel3XL = new HashMap<>();
-        propsToChangePixel3XL.put("BRAND", "google");
-        propsToChangePixel3XL.put("MANUFACTURER", "Google");
-        propsToChangePixel3XL.put("DEVICE", "crosshatch");
-        propsToChangePixel3XL.put("PRODUCT", "crosshatch");
-        propsToChangePixel3XL.put("MODEL", "Pixel 3 XL");
-        propsToChangePixel3XL.put("FINGERPRINT", "google/crosshatch/crosshatch:12/SPB5.210812.002/7671067:user/release-keys");
     }
 
     public static void setProps(String packageName) {
@@ -122,16 +111,6 @@ public class PixelPropsUtils {
                 Log.d(TAG, "Defining props for: " + packageName);
             }
             for (Map.Entry<String, Object> prop : propsToChangePixelXL.entrySet()) {
-                String key = prop.getKey();
-                Object value = prop.getValue();
-                setPropValue(key, value);
-            }
-        }
-        if (Arrays.asList(packagesToChangePixel3XL).contains(packageName)){
-            if (DEBUG){
-                Log.d(TAG, "Defining props for: " + packageName);
-            }
-            for (Map.Entry<String, Object> prop : propsToChangePixel3XL.entrySet()) {
                 String key = prop.getKey();
                 Object value = prop.getValue();
                 setPropValue(key, value);
