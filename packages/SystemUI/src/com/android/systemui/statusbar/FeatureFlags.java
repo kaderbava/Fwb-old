@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
 import com.android.systemui.R;
@@ -100,7 +101,8 @@ public class FeatureFlags {
 
     /** Whether or not to use the provider model behavior for the status bar icons */
     public boolean isCombinedStatusBarSignalIconsEnabled() {
-        return mFlagReader.isEnabled(R.bool.flag_combined_status_bar_signal_icons);
+        return Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.COMBINE_STATUSBAR_SIGNAL, 0) == 1;
     }
 
     /** System setting for provider model behavior */
