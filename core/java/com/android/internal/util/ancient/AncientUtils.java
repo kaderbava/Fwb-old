@@ -65,7 +65,7 @@ public class AncientUtils {
     public static final String INTENT_SCREENSHOT = "action_take_screenshot";
     public static final String INTENT_REGION_SCREENSHOT = "action_take_region_screenshot";
 
-    private static final String TAG = "AEXUtils";
+    private static final String TAG = "AncientUtils";
 
     private static final boolean DEBUG = false;
 
