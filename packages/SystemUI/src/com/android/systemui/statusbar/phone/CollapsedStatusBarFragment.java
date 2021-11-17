@@ -40,10 +40,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.animation.Interpolators;
+import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.FeatureFlags;
@@ -112,6 +116,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private LinearLayout mCenterClockLayout;
     private View mRightClock;
     private boolean mShowClock = true;
+    private ImageView mAncientLogo;
+    private boolean mShowLogo;
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
     private boolean mHasCarrierLabel;
@@ -134,6 +140,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                     false, this, UserHandle.USER_ALL);
          mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    false, this, UserHandle.USER_ALL);
+         mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_LOGO),
                     false, this, UserHandle.USER_ALL);
        }
 
@@ -234,6 +243,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mOngoingCallChip = mStatusBar.findViewById(R.id.ongoing_call_chip);
         mCenterClockLayout = (LinearLayout) mStatusBar.findViewById(R.id.center_clock_layout);
         mRightClock = mStatusBar.findViewById(R.id.right_clock);
+        mAncientLogo = (ImageView)mStatusBar.findViewById(R.id.status_bar_logo);
+        Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mAncientLogo);
         mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
@@ -280,6 +291,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (mBatteryMeterView != null) {
             mBatteryMeterView.removeCallback(mBatteryMeterViewCallback);
         }
+        Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(mAncientLogo);
     }
 
     /** Initializes views related to the notification icon area. */
@@ -472,8 +484,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public void hideNotificationIconArea(boolean animate) {
         animateHide(mNotificationIconAreaInner, animate, true);
         animateHide(mCenteredIconArea, animate, true);
-	animateHide(mCenterClockLayout, animate, true);
+        animateHide(mCenterClockLayout, animate, true);
         animateHide(mCustomIconArea, animate, true);
+        if (mShowLogo) {
+            animateHide(mAncientLogo, animate, true);
+        }
     }
 
     public void showNotificationIconArea(boolean animate) {
@@ -481,6 +496,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         animateShow(mCenteredIconArea, animate);
         animateShow(mCenterClockLayout, animate);
         animateShow(mCustomIconArea, animate);
+        if (mShowLogo) {
+            animateShow(mAncientLogo, animate);
+        }
     }
 
     public void hideOperatorName(boolean animate) {
@@ -647,6 +665,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mShowClock = Settings.System.getIntForUser(mContentResolver,
                 Settings.System.STATUSBAR_CLOCK, 1,
                 UserHandle.USER_CURRENT) == 1;
+        mShowLogo = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.STATUS_BAR_LOGO, 0,
+                UserHandle.USER_CURRENT) == 1;
         mShowCarrierLabel = Settings.System.getIntForUser(mContentResolver,
                 Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
                 UserHandle.USER_CURRENT);
@@ -661,6 +682,15 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
         updateClockStyle(animate);
         setCarrierLabel(animate);
+        if (mNotificationIconAreaInner != null) {
+            if (mShowLogo) {
+                if (mNotificationIconAreaInner.getVisibility() == View.VISIBLE) {
+                    animateShow(mAncientLogo, animate);
+                }
+            } else {
+                animateHide(mAncientLogo, animate, false);
+            }
+        }
     }
 
     private void updateClockStyle(boolean animate) {
