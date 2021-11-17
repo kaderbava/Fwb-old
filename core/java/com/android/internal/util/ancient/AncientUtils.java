@@ -65,6 +65,11 @@ import android.content.pm.PackageManager.NameNotFoundException;
  */
 public class AncientUtils {
 
+    public static final String DOZE_PACKAGE_NAME = "Doze";
+    public static final String LINEAGE_DOZE_PACKAGE_NAME = "org.lineageos.settings.doze";
+    public static final String CUSTOM_DOZE_PACKAGE_NAME = "com.custom.ambient.display";
+    public static final String ONEPLUS_DOZE_PACKAGE_NAME = "OnePlusDoze";
+
     public static final String INTENT_SCREENSHOT = "action_take_screenshot";
     public static final String INTENT_REGION_SCREENSHOT = "action_take_region_screenshot";
 
@@ -306,5 +311,12 @@ public class AncientUtils {
     public static boolean isChineseLanguage() {
        return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
                Locale.CHINESE.getLanguage());
+    }
+
+    public static boolean isDozePackageAvailable(Context context) {
+        return isPackageInstalled(context, DOZE_PACKAGE_NAME) ||
+            isPackageInstalled(context, ONEPLUS_DOZE_PACKAGE_NAME) ||
+            isPackageInstalled(context, LINEAGE_DOZE_PACKAGE_NAME) ||
+            isPackageInstalled(context, CUSTOM_DOZE_PACKAGE_NAME);
     }
 }
